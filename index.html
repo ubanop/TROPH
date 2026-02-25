@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>ТРОФИМ ПРОСТИ НАС</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    color: red;
+    font-family: monospace;
+    text-align: center;
+  }
+  #chaosText {
+    font-size: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+    animation: blinkZoom 0.2s infinite alternate;
+  }
+  img {
+    max-width: 70%;
+    max-height: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: brightness(1);
+    transition: all 0.1s ease;
+  }
+
+  @keyframes blinkZoom {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.2; transform: scale(1.3); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+</style>
+</head>
+<body>
+
+<div id="chaosText">ТРОФИМ ПРОСТИ МЕНЯ <span id="maxText">УМОЛЯЮ ПРОСТИ НАС</span></div>
+<img id="funImage" src="face1.jpg" alt="chaos">
+
+<audio id="funSound" src="sound.mp3" autoplay loop></audio>
+
+<script>
+const images = ["face1.jpg","face2.jpg","face3.jpg"];
+const imgEl = document.getElementById("funImage");
+let index = 0;
+
+function chaosEffect() {
+    // Меняем картинку
+    index = Math.floor(Math.random() * images.length);
+    imgEl.src = images[index];
+
+    // Случайный зум и яркость
+    const zoom = 0.8 + Math.random() * 0.6; // 0.8-1.4
+    const brightness = 0.5 + Math.random() * 1.5; // 0.5-2
+    imgEl.style.transform = `translate(-50%, -50%) scale(${zoom}) rotate(${Math.random()*30-15}deg)`;
+    imgEl.style.filter = `brightness(${brightness})`;
+
+    // Мигающая надпись
+    const maxText = document.getElementById("maxText");
+    maxText.style.color = `rgb(${Math.random()*255},0,0)`;
+    maxText.style.fontSize = `${30 + Math.random()*50}px`;
+}
+
+// Меняем эффекты каждые 100 мс
+setInterval(chaosEffect, 100);
+</script>
+
+</body>
+</html>
